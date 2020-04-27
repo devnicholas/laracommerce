@@ -9,6 +9,19 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    <!-- Plugins -->
+    @foreach(config('app.plugins') as $plugin)
+        @if($plugin['active'])
+            @foreach($plugin['files'] as $file)
+                @if($file['type']=='js')
+                    <script src="{{ $file['location'] }}" defer></script>
+                @elseif($file['type']=='css')
+                    <link href="{{ $file['location'] }}" rel="stylesheet">
+                @endif
+            @endforeach
+        @endif
+    @endforeach
+
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
@@ -18,10 +31,11 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @yield('css')
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm d-none">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -72,9 +86,11 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main class="">
             @yield('content')
         </main>
     </div>
+    <!-- Scripts -->
+    @yield('js')
 </body>
 </html>
