@@ -16,7 +16,7 @@ class CheckAdminUser
      */
     public function handle($request, Closure $next)
     {
-        if(! $request->user()->admin){
+        if(!$request->user() || !$request->user()->admin){
             return redirect('/')->with('error', 'Usuário não possui permissão para acessar essa página');
         }
         return $next($request);

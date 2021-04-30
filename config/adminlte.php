@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
+    'title' => 'LaraCommerce',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -30,7 +30,7 @@ return [
     |
     */
 
-    'use_ico_only' => false,
+    'use_ico_only' => true,
     'use_full_favicon' => false,
 
     /*
@@ -45,12 +45,12 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    'logo' => '<b>Lara</b>Commerce',
+    'logo_img' => 'LaraCommerce.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
-    'logo_img_alt' => 'AdminLTE',
+    'logo_img_alt' => 'LaraCommerce',
 
     /*
     |--------------------------------------------------------------------------
@@ -173,7 +173,7 @@ return [
 
     'login_url' => 'login',
 
-    'register_url' => 'register',
+    'register_url' => false,
 
     'password_reset_url' => 'password/reset',
 
@@ -209,83 +209,53 @@ return [
 
     'menu' => [
         [
-            'text' => 'search',
-            'search' => true,
-            'topnav' => true,
+            'text'          => 'Home',
+            'route'         => 'dashboard',
+            'icon'          => 'fas fa-fw fa-home',
         ],
         [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ],
-        [
-            'text'        => 'pages',
-            'url'         => 'admin/pages',
-            'icon'        => 'far fa-fw fa-file',
-            'label'       => 4,
-            'label_color' => 'success',
-        ],
-        ['header' => 'account_settings'],
-        [
-            'text' => 'profile',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'change_password',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
-        [
-            'text'    => 'multilevel',
-            'icon'    => 'fas fa-fw fa-share',
-            'submenu' => [
+            'text'          => 'Catálogo',
+            'url'           => '#',
+            'icon'          => 'fas fa-fw fa-box-open',
+            'submenu'       => [
                 [
-                    'text' => 'level_one',
-                    'url'  => '#',
+                    'text'      => 'Produtos',
+                    'route'     => 'dashboard.product.index',
                 ],
                 [
-                    'text'    => 'level_one',
-                    'url'     => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url'  => '#',
-                        ],
-                        [
-                            'text'    => 'level_two',
-                            'url'     => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                            ],
-                        ],
-                    ],
+                    'text'      => 'Categorias',
+                    'route'     => 'dashboard.category.index',
                 ],
                 [
-                    'text' => 'level_one',
-                    'url'  => '#',
+                    'text'      => 'Atributos',
+                    'route'       => 'dashboard.attribute.index',
                 ],
-            ],
-        ],
-        ['header' => 'labels'],
-        [
-            'text'       => 'important',
-            'icon_color' => 'red',
+            ]
         ],
         [
-            'text'       => 'warning',
-            'icon_color' => 'yellow',
+            'text'          => 'Usuários',
+            'url'           => '#',
+            'icon'          => 'fas fa-fw fa-user',
         ],
         [
-            'text'       => 'information',
-            'icon_color' => 'aqua',
+            'text'          => 'Pedidos',
+            'url'           => '#',
+            'icon'          => 'fas fa-fw fa-shopping-cart',
+        ],
+        [
+            'text'          => 'Promoções',
+            'url'           => '#',
+            'icon'          => 'fas fa-fw fa-bookmark',
+        ],
+        [
+            'text'          => 'Relatórios',
+            'url'           => '#',
+            'icon'          => 'fas fa-fw fa-chart-pie',
+        ],
+        [
+            'text'          => 'Conteúdos',
+            'url'           => '#',
+            'icon'          => 'fas fa-fw fa-file-alt',
         ],
     ],
 
@@ -397,6 +367,17 @@ return [
                     'asset' => false,
                     'location' => '//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js',
                 ],
+            ],
+        ],
+        [
+            'name' => 'JQueryMask',
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => false,
+                    'location' => '//cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js',
+                ]
             ],
         ],
     ],
