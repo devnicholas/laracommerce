@@ -59,7 +59,7 @@
                             @foreach($attributes as $attr)
                             <div class="form-group">
                                 <label>{{$attr->name}}</label>
-                                <input type="text" name="attributes[{{$attr->id}}][value]" class="form-control" 
+                                <input type="text" name="attributes[{{$attr->id}}]" class="form-control" 
                                     value="{{ Helper::getAttributeFromProduct($item, $attr->id) }}" />
                             </div>
                             @endforeach

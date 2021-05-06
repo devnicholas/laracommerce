@@ -44,10 +44,10 @@ class AttributeController extends Controller
     public function update($id, Request $request)
     {
         $this->validate($request, $this->defaultRules, $this->messages);
-        $item = Attribute::find($id);
-        $data = $request->only($this->fields);
-
+        
         try {
+            $item = Attribute::find($id);
+            $data = $request->only($this->fields);
             $item->update($data);
 
             return redirect()->route('dashboard.' . $this->slugRoutes . '.index')->with('success', 'Item salvo com sucesso');
@@ -57,8 +57,11 @@ class AttributeController extends Controller
     }
     public function destroy($id)
     {
-        $item = Attribute::find($id);
         try {
+            $item = Attribute::with('products')->find($id);
+            foreach ($item->products as $prod) {
+                $prod->pivot->delete();
+            }
             $item->delete();
 
             return redirect()->route('dashboard.' . $this->slugRoutes . '.index')->with('success', 'Item excluído com sucesso');

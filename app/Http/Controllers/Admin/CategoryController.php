@@ -44,10 +44,10 @@ class CategoryController extends Controller
     public function update($id, Request $request)
     {
         $this->validate($request, $this->defaultRules, $this->messages);
-        $item = Category::find($id);
-        $data = $request->only($this->fields);
-
+        
         try {
+            $item = Category::find($id);
+            $data = $request->only($this->fields);
             $item->update($data);
 
             return redirect()->route('dashboard.' . $this->slugRoutes . '.index')->with('success', 'Item salvo com sucesso');
@@ -57,8 +57,8 @@ class CategoryController extends Controller
     }
     public function destroy($id)
     {
-        $item = Category::find($id);
         try {
+            $item = Category::find($id);
             $item->delete();
 
             return redirect()->route('dashboard.' . $this->slugRoutes . '.index')->with('success', 'Item excluído com sucesso');

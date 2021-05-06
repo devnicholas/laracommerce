@@ -40,7 +40,14 @@ class ProductController extends Controller
                 $data['image'] = $filename ? $filename : null;
             }
             $product = Product::create($data);
-            $product->attributes()->sync($request->input('attributes'));
+            
+            $attrs = [];
+            foreach($request->input('attributes') as $id => $value){
+                if($value && $value!='')
+                    $attrs[$id] = ['value' => $value];
+            }
+            $product->attributes()->sync($attrs);
+
             DB::commit();
             return redirect()->route('dashboard.' . $this->slugRoutes . '.index')->with('success', 'Item salvo com sucesso');
         } catch (\Exception $e) {
@@ -64,31 +71,40 @@ class ProductController extends Controller
     public function update($id, Request $request)
     {
         $this->validate($request, $this->defaultRules, $this->messages);
-        $item = Product::find($id);
-        $data = $request->only($this->fields);
         
         try {
+            $item = Product::find($id);
+            $data = $request->only($this->fields);
+            DB::beginTransaction();
             if($request->image){
                 $filename = Helper::uploadFile($request->image, 'products/');
                 $data['image'] = $filename ? $filename : null;
             }
             $item->update($data);
-            $item->attributes()->sync($request->input('attributes'));
 
+            $attrs = [];
+            foreach($request->input('attributes') as $id => $value){
+                if($value && $value!='')
+                    $attrs[$id] = ['value' => $value];
+            }
+            $item->attributes()->sync($attrs);
+
+            DB::commit();
             return redirect()->route('dashboard.' . $this->slugRoutes . '.index')->with('success', 'Item salvo com sucesso');
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Ocorreu um erro ao salvar');
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Ocorreu um erro ao salvar: ' . $e->getMessage());
         }
     }
     public function destroy($id)
     {
-        $item = Product::find($id);
         try {
+            $item = Product::find($id);
             $item->delete();
 
             return redirect()->route('dashboard.' . $this->slugRoutes . '.index')->with('success', 'Item excluído com sucesso');
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Ocorreu um erro ao excluir');
+            return redirect()->back()->with('error', 'Ocorreu um erro ao excluir: ' . $e->getMessage());
         }
     }
 }

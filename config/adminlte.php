@@ -16,7 +16,7 @@ return [
 
     'title' => 'LaraCommerce',
     'title_prefix' => '',
-    'title_postfix' => '',
+    'title_postfix' => env('APP_NAME') ? ' | '.env('APP_NAME') : '',
 
     /*
     |--------------------------------------------------------------------------
