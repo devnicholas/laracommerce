@@ -220,7 +220,16 @@ return [
             'submenu'       => [
                 [
                     'text'      => 'Produtos',
-                    'route'     => 'dashboard.product.index',
+                    'submenu'   => [
+                        [
+                            'text'      => 'Produtos simples',
+                            'route'     => 'dashboard.product.index',
+                        ],
+                        [
+                            'text'      => 'Produtos agrupados',
+                            'route'     => 'dashboard.group-product.index',
+                        ],
+                    ]
                 ],
                 [
                     'text'      => 'Categorias',
@@ -275,7 +284,6 @@ return [
         JeroenNoten\LaravelAdminLte\Menu\Filters\HrefFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\SearchFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\ActiveFilter::class,
-        JeroenNoten\LaravelAdminLte\Menu\Filters\SubmenuFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\ClassesFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\GateFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\LangFilter::class,

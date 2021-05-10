@@ -46,4 +46,12 @@ Route::prefix('dashboard')->middleware('auth.admin')->group(function(){
         Route::put('/{id}', 'Admin\AttributeController@update')->name('dashboard.attribute.update');
         Route::delete('/{id}', 'Admin\AttributeController@destroy')->name('dashboard.attribute.destroy');
     });
+    Route::prefix('group-products')->group(function(){
+        Route::get('/', 'Admin\GroupProductController@index')->name('dashboard.group-product.index');
+        Route::post('/', 'Admin\GroupProductController@store')->name('dashboard.group-product.store');
+        Route::get('/create', 'Admin\GroupProductController@create')->name('dashboard.group-product.create');
+        Route::get('/{id}', 'Admin\GroupProductController@show')->name('dashboard.group-product.show');
+        Route::put('/{id}', 'Admin\GroupProductController@update')->name('dashboard.group-product.update');
+        Route::delete('/{id}', 'Admin\GroupProductController@destroy')->name('dashboard.group-product.destroy');
+    });
 });
