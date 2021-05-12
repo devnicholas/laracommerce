@@ -253,7 +253,7 @@ return [
         ],
         [
             'text'          => 'Promoções',
-            'url'           => '#',
+            'route'         => 'dashboard.promotion.index',
             'icon'          => 'fas fa-fw fa-bookmark',
         ],
         [

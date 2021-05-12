@@ -15,9 +15,9 @@ class CreatePromotionsTable extends Migration
     {
         Schema::create('promotions', function (Blueprint $table) {
             $table->id();
-            $table->boolean('automatic');
+            $table->boolean('automatic')->default(false);
             $table->string('coupon')->nullable();
-            $table->longText('products_data')->nullable();
+            $table->longText('products')->nullable();
             $table->timestamp('startAt')->nullable();
             $table->timestamp('endAt')->nullable();
             $table->integer('limit')->default(0);
