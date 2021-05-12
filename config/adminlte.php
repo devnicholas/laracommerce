@@ -243,7 +243,7 @@ return [
         ],
         [
             'text'          => 'Usuários',
-            'url'           => '#',
+            'route'         => 'dashboard.user.index',
             'icon'          => 'fas fa-fw fa-user',
         ],
         [
