@@ -23,3 +23,10 @@ Para rodar a aplicação localmente, siga os passos abaixos:
 4. Execute o comando `php artisan link:storage` para criar um caminho publico para a pasta de uploads.
 5. Execute o comando `php artisan migrate --seed` para criar a estrutura do banco de dados com o primeiro usuário cadastrado. E-mail: *admin@mail.com*; Senha: 123456.
 6. Execute o comando `php artisan serve` para executar a aplicação utilizando o servidor embutido do PHP. A aplicação subirá em localhost na porta 8000.
+
+## Comandos personalizados
+Para criar rapidamente CRUDs no painel administrativo pode-se usar o comando:
+`php artisan lc:files {plural} {singular} {--noModel}`
+Onde `plural` representa o conteúdo escrito no plural e `{singular}` escrito no singular. Caso a flag `--noModel` não seja passada, o comando irá criar um model com migration.
+Ex.: `php artisan lc:files users user --noModel`
+O comando irá criar um controller em `app\Http\Controllers\Admin\`, irá criar as views para o CRUD em `resources\views\admin\{singular}` e irá exibir na saída do terminal um bloco de rotas para ser inseridas conforme sua necessidade. Caso a flag `--noModel` não seja informada, o comando irá criar um Model em `app\Models\DB`.
