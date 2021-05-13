@@ -61,6 +61,15 @@ Route::prefix('dashboard')->middleware('auth.admin')->group(function(){
         Route::get('/{id}', 'Admin\UserController@show')->name('dashboard.user.show');
         Route::put('/{id}', 'Admin\UserController@update')->name('dashboard.user.update');
         Route::delete('/{id}', 'Admin\UserController@destroy')->name('dashboard.user.destroy');
+        
+        Route::prefix('/{user}/addresses')->group(function(){
+            Route::get('/', 'Admin\AddressController@index')->name('dashboard.address.index');
+            Route::post('/', 'Admin\AddressController@store')->name('dashboard.address.store');
+            Route::get('/create', 'Admin\AddressController@create')->name('dashboard.address.create');
+            Route::get('/{id}', 'Admin\AddressController@show')->name('dashboard.address.show');
+            Route::put('/{id}', 'Admin\AddressController@update')->name('dashboard.address.update');
+            Route::delete('/{id}', 'Admin\AddressController@destroy')->name('dashboard.address.destroy');
+        });
     });
     Route::prefix('promotions')->group(function(){
         Route::get('/', 'Admin\PromotionController@index')->name('dashboard.promotion.index');

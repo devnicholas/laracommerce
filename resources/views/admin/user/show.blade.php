@@ -12,6 +12,11 @@
                             Editar registro
                         </p>
                     </div>
+                    <div class="actions text-right w-50">
+                        <a class="btn btn-primary" href="{{ route('dashboard.address.index', $item->id) }}">
+                            Endereços
+                        </a>
+                    </div>
                 </div>
                 <div class="card-body">
                     <form action="{{ route('dashboard.user.update', $item->id) }}" method="post">
