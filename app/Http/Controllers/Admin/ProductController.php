@@ -85,7 +85,7 @@ class ProductController extends Controller
             $item->update($data);
 
             $attrs = [];
-            if(!$request->input('attributes')!=null){
+            if($request->input('attributes')!=null){
                 foreach($request->input('attributes') as $id => $value){
                     if($value && $value!='')
                         $attrs[$id] = ['value' => $value];

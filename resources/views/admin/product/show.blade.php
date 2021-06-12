@@ -27,9 +27,7 @@
                         </div>
                         <div class="form-group">
                             <label>Imagem</label>
-                            <div><a href="{{ url('storage/products/'.$item->image) }}" target="_blank">Ver imagem atual</a></div>
-                            <input type="file" name="image" class="form-control">
-                            <small class="form-text text-muted">Se não for atualizar deixar vazio o campo</small>
+                            @include('components.upload', ['name' => 'image', 'value' => url('storage/products/'.$item->image)])
                         </div>
                         <div class="form-group">
                             <label>Descrição</label>
@@ -55,18 +53,15 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="collapse" id="attributesCollapse">
-                            @foreach($attributes as $attr)
-                            <div class="form-group">
-                                <label>{{$attr->name}}</label>
-                                <input type="text" name="attributes[{{$attr->id}}]" class="form-control" 
-                                    value="{{ Helper::getAttributeFromProduct($item, $attr->id) }}" />
-                            </div>
-                            @endforeach
+                        @foreach($attributes as $attr)
+                        <div class="form-group">
+                            <label>{{$attr->name}}</label>
+                            <input type="text" name="attributes[{{$attr->id}}]" class="form-control" 
+                                value="{{ Helper::getAttributeFromProduct($item, $attr->id) }}" />
                         </div>
+                        @endforeach
                         <div class="form-group mt-3">
                             <button type="submit" class="btn btn-primary">Salvar</button>
-                            <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#attributesCollapse">Ver atributos</button>
                         </div>
                     </form>
                 </div>

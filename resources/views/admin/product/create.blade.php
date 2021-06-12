@@ -26,7 +26,7 @@
                         </div>
                         <div class="form-group">
                             <label>Imagem</label>
-                            <input type="file" name="image" class="form-control">
+                            @include('components.upload', ['name' => 'image'])
                         </div>
                         <div class="form-group">
                             <label>Descrição</label>
@@ -49,17 +49,14 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="collapse" id="attributesCollapse">
                         @foreach($attributes as $attr)
                         <div class="form-group">
                             <label>{{$attr->name}}</label>
                             <input type="text" name="attributes[{{$attr->id}}][value]" class="form-control" />
                         </div>
                         @endforeach
-                        </div>
                         <div class="form-group mt-3">
                             <button type="submit" class="btn btn-primary">Salvar</button>
-                            <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#attributesCollapse">Ver atributos</button>
                         </div>
                     </form>
                 </div>
