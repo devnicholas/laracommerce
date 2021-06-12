@@ -1,5 +1,12 @@
 @extends('adminlte::page')
 
+@section('js')
+<script>
+    $('input[name=name]').on('focusout', function(){
+        $('input[name=slug]').val($(this).val().replace(/[^a-zA-Z0-9]+/g,'-').toLowerCase())
+    })
+</script>
+@endsection
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -26,7 +33,7 @@
                         </div>
                         <div class="form-group">
                             <label>Imagem</label>
-                            <input type="file" name="image" class="form-control">
+                            @include('components.upload', ['name' => 'image'])
                         </div>
                         <div class="form-group">
                             <label>Descrição</label>

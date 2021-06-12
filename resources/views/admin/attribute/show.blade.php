@@ -21,6 +21,11 @@
                             <label>Nome</label>
                             <input type="text" name="name" class="form-control" value="{{ $item->name }}">
                         </div>
+                        <div class="form-group">
+                            <label>Valores</label>
+                            <textarea class="form-control" name="values">{{ implode(', ', json_decode($item->values)) }}</textarea>
+                            <small class="text-muted">Valores separados por vírgula. Ex.: Vermelho, Azul, Verde</small>
+                        </div>
                         <div class="form-group mt-3">
                             <button type="submit" class="btn btn-primary">Salvar</button>
                         </div>

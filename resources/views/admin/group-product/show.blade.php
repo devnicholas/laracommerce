@@ -1,5 +1,12 @@
 @extends('adminlte::page')
 
+@section('js')
+<script>
+    $('input[name=name]').on('focusout', function(){
+        $('input[name=slug]').val($(this).val().replace(/[^a-zA-Z0-9]+/g,'-').toLowerCase())
+    })
+</script>
+@endsection
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -27,11 +34,7 @@
                         </div>
                         <div class="form-group">
                             <label>Imagem</label>
-                            @if($item->image)
-                            <div><a href="{{ url('storage/products/'.$item->image) }}" target="_blank">Ver imagem atual</a></div>
-                            @endif
-                            <input type="file" name="image" class="form-control">
-                            <small class="form-text text-muted">Se não for atualizar deixar vazio o campo</small>
+                            @include('components.upload', ['name' => 'image', 'value' => url('storage/products/'.$item->image)])
                         </div>
                         <div class="form-group">
                             <label>Descrição</label>

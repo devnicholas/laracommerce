@@ -12,7 +12,7 @@ class AttributeController extends Controller
         'name' => 'required',
     ];
     private $fields = [
-        'name'
+        'name', 'values'
     ];
     private $slugRoutes = 'attribute';
 
@@ -26,6 +26,7 @@ class AttributeController extends Controller
         $this->validate($request, $this->defaultRules, $this->messages);
         $data = $request->only($this->fields);
         try {
+            $data['values'] = json_encode(explode(', ', $data['values']));
             Attribute::create($data);
             return redirect()->route('dashboard.' . $this->slugRoutes . '.index')->with('success', 'Item salvo com sucesso');
         } catch (\Exception $e) {
@@ -48,6 +49,7 @@ class AttributeController extends Controller
         try {
             $item = Attribute::find($id);
             $data = $request->only($this->fields);
+            $data['values'] = json_encode(explode(', ', $data['values']));
             $item->update($data);
 
             return redirect()->route('dashboard.' . $this->slugRoutes . '.index')->with('success', 'Item salvo com sucesso');

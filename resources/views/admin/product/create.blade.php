@@ -1,5 +1,12 @@
 @extends('adminlte::page')
 
+@section('js')
+<script>
+    $('input[name=name]').on('focusout', function(){
+        $('input[name=slug]').val($(this).val().replace(/[^a-zA-Z0-9]+/g,'-').toLowerCase())
+    })
+</script>
+@endsection
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -51,8 +58,13 @@
                         </div>
                         @foreach($attributes as $attr)
                         <div class="form-group">
-                            <label>{{$attr->name}}</label>
-                            <input type="text" name="attributes[{{$attr->id}}][value]" class="form-control" />
+                            <label for="attribute-{{$attr->id}}">{{$attr->name}}</label>
+                            <select name="attributes[{{$attr->id}}]" id="attribute-{{$attr->id}}" class="form-control">
+                                <option value>Selecione</option>
+                                @foreach(json_decode($attr->values) as $value)
+                                    <option value="{{$value}}">{{$value}}</option>
+                                @endforeach
+                            </select>
                         </div>
                         @endforeach
                         <div class="form-group mt-3">
