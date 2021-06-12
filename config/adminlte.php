@@ -248,7 +248,7 @@ return [
         ],
         [
             'text'          => 'Pedidos',
-            'url'           => '#',
+            'route'         => 'dashboard.order.index',
             'icon'          => 'fas fa-fw fa-shopping-cart',
         ],
         [

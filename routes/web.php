@@ -79,4 +79,9 @@ Route::prefix('dashboard')->middleware('auth.admin')->group(function(){
         Route::put('/{id}', 'Admin\PromotionController@update')->name('dashboard.promotion.update');
         Route::delete('/{id}', 'Admin\PromotionController@destroy')->name('dashboard.promotion.destroy');
     });
+    Route::prefix('orders')->group(function(){
+        Route::get('/', 'Admin\OrderController@index')->name('dashboard.order.index');
+        Route::get('/{id}', 'Admin\OrderController@show')->name('dashboard.order.show');
+        Route::get('/{id}/status/{status}', 'Admin\OrderController@update')->name('dashboard.order.update');
+    });
 });

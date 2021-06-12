@@ -30,4 +30,25 @@ class Helper
         }
         return '';
     }
+    public static function translateStatus($status)
+    {
+        $allStatus = [
+            'new' => 'Novo',
+            'completed' => 'Completo',
+            'canceled' => 'Cancelado'
+        ];
+        return $allStatus[$status];
+    }
+    public static function translateShippingValue($value)
+    {
+        $allValues = [
+            'checkpoint' => 'Local de retirada',
+            'region' => 'Bairro',
+            'street' => 'Endereço',
+            'number' => 'Número',
+            'complement' => 'Complemento',
+            'reference_point' => 'Ponto de referência'
+        ];
+        return $allValues[$value];
+    }
 }
