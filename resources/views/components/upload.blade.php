@@ -1,6 +1,6 @@
 <div class="upload-component">
     <div class="preview">
-        <img src="{{ $value ?? 'https://m3placement.com/wp-content/uploads/2021/03/image-placeholder-350x350-1.png' }}" id="preview-{{$name}}" />
+        <img src="{{ $value ?? '' }}" onerror="this.src='/placeholder.png'" id="preview-{{$name}}"/>
     </div>
     <label for="{{ $name }}" class="btn btn-info">Alterar</label>
     <input type="file" name="{{ $name }}" id="{{ $name }}">
