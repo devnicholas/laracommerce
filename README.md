@@ -4,7 +4,7 @@ As funcionalidades são:
  - Comando para criação de CRUD's no admin rapidamente.
  - Estrutura para produtos simples e agrupados com atributos personalizados.
  - Cadastro de categorias e relacionamento com produtos.
- - Gerenciamento de usuários. [A FAZER]
+ - Gerenciamento de usuários.
  - Visualização de pedidos. [A FAZER]
  - Criação de promoções e cupons promocionais. [A FAZER]
  - Relatórios de faturamento, produtos mais vendidos e estoque. [A FAZER]

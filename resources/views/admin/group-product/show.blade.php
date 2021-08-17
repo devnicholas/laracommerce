@@ -42,11 +42,10 @@
                         </div>
                         <div class="form-group">
                             <label>Categoria</label>
-                            <select name="category_id" class="form-control">
-                                <option value>Selecione</option>
+                            <select name="categories[]" class="form-control" multiple>
                                 @foreach($categories as $cat)
                                     <option value="{{ $cat->id }}" 
-                                      {{ $item->category && $item->category->id == $cat->id ? 'selected' : ''}}>
+                                      {{ in_array($cat->id, $item->categories()->allRelatedIds()->toArray()) ? 'selected' : ''}}>
                                         {{ $cat->name }}
                                     </option>
                                 @endforeach

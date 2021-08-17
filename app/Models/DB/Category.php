@@ -10,6 +10,10 @@ class Category extends Model
 
     public function products()
     {
-        return $this->hasMany('App\Models\DB\Product');
+        return $this->belongsToMany('App\Models\DB\Product')->withPivot('order')->withTimestamps();;
+    }
+    public function groupProducts()
+    {
+        return $this->belongsToMany('App\Models\DB\GroupProduct', 'category_product')->withPivot('order')->withTimestamps();;
     }
 }

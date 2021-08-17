@@ -16,7 +16,7 @@ class GroupProductController extends Controller
         'slug' => 'required',
     ];
     private $fields = [
-        'name', 'slug', 'image', 'description', 'products', 'category_id', 'products'
+        'name', 'slug', 'image', 'description', 'products'
     ];
     private $slugRoutes = 'group-product';
 
@@ -39,7 +39,10 @@ class GroupProductController extends Controller
                 $data['image'] = $filename ? $filename : null;
             }
             
-            GroupProduct::create($data);
+            $newProduct = GroupProduct::create($data);
+            if($request->input('categories')!=null){
+                $newProduct->categories()->sync($request->input('categories'));
+            }
             return redirect()->route('dashboard.' . $this->slugRoutes . '.index')->with('success', 'Item salvo com sucesso');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Ocorreu um erro ao salvar: ' . $e->getMessage());
@@ -53,7 +56,7 @@ class GroupProductController extends Controller
     }
     public function show($id)
     {
-        $item = GroupProduct::find($id);
+        $item = GroupProduct::with('categories')->find($id);
         $categories = Category::get();
         $products = Product::get();
         return view('admin.' . $this->slugRoutes . '.show', compact('item', 'categories', 'products'));
@@ -72,6 +75,9 @@ class GroupProductController extends Controller
             }
 
             $item->update($data);
+            if($request->input('categories')!=null){
+                $item->categories()->sync($request->input('categories'));
+            }
 
             return redirect()->route('dashboard.' . $this->slugRoutes . '.index')->with('success', 'Item salvo com sucesso');
         } catch (\Exception $e) {

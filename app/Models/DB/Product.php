@@ -8,9 +8,9 @@ class Product extends Model
 {
     protected $guarded = [];
     
-    public function category()
+    public function categories()
     {
-        return $this->belongsTo('App\Models\DB\Category');
+        return $this->belongsToMany('App\Models\DB\Category')->withPivot('order')->withTimestamps();;
     }
     public function cartItems()
     {

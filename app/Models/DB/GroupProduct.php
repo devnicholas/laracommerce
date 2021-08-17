@@ -8,6 +8,11 @@ class GroupProduct extends Model
 {
     protected $guarded = [];
 
+    public function categories()
+    {
+        return $this->belongsToMany('App\Models\DB\Category', 'category_product')->withPivot('order')->withTimestamps();;
+    }
+
     public function inGroup(Int $id)
     {
         foreach(json_decode($this->products) as $prod){

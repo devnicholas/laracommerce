@@ -20,8 +20,6 @@ class CreateGroupProductsTable extends Migration
             $table->string('image')->nullable();
             $table->string('description')->nullable();
             $table->longText('products');
-            $table->unsignedBigInteger('category_id')->nullable();
-            $table->foreign('category_id')->references('id')->on('categories');
             $table->timestamps();
         });
     }

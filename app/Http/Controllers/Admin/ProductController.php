@@ -19,7 +19,7 @@ class ProductController extends Controller
         'price' => 'required|numeric|min:0'
     ];
     private $fields = [
-        'name', 'slug', 'image', 'description', 'qty', 'price', 'category_id'
+        'name', 'slug', 'image', 'description', 'qty', 'price'
     ];
     private $slugRoutes = 'product';
 
@@ -49,6 +49,9 @@ class ProductController extends Controller
                 }
                 $product->attributes()->sync($attrs);
             }
+            if($request->input('categories')!=null){
+                $product->categories()->sync($request->input('categories'));
+            }
 
             DB::commit();
             return redirect()->route('dashboard.' . $this->slugRoutes . '.index')->with('success', 'Item salvo com sucesso');
@@ -65,7 +68,7 @@ class ProductController extends Controller
     }
     public function show($id)
     {
-        $item = Product::with('attributes')->find($id);
+        $item = Product::with(['attributes', 'categories'])->find($id);
         $categories = Category::get();
         $attributes = Attribute::get();
         return view('admin.' . $this->slugRoutes . '.show', compact('item', 'categories', 'attributes'));
@@ -92,6 +95,9 @@ class ProductController extends Controller
                 }
             }
             $item->attributes()->sync($attrs);
+            if($request->input('categories')!=null){
+                $item->categories()->sync($request->input('categories'));
+            }
 
             DB::commit();
             return redirect()->route('dashboard.' . $this->slugRoutes . '.index')->with('success', 'Item salvo com sucesso');
