@@ -29,6 +29,9 @@ Route::prefix('dashboard')->middleware('auth.admin')->group(function(){
         Route::get('/{id}', 'Admin\CategoryController@show')->name('dashboard.category.show');
         Route::put('/{id}', 'Admin\CategoryController@update')->name('dashboard.category.update');
         Route::delete('/{id}', 'Admin\CategoryController@destroy')->name('dashboard.category.destroy');
+
+        Route::get('/{id}/order', 'Admin\CategoryController@order')->name('dashboard.category.order');
+        Route::post('/{id}/order', 'Admin\CategoryController@orderStore')->name('dashboard.category.orderStore');
     });
     Route::prefix('products')->group(function(){
         Route::get('/', 'Admin\ProductController@index')->name('dashboard.product.index');

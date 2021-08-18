@@ -66,4 +66,42 @@ class CategoryController extends Controller
             return redirect()->back()->with('error', 'Ocorreu um erro ao excluir: ' . $e->getMessage());
         }
     }
+    public function order($id)
+    {
+        $category = Category::with('products', 'groupProducts')->find($id);
+        if(!$category) 
+            return redirect()->back()->with('error', 'Não foi possível encontrar a categoria especificada');
+
+        $items = array_merge($category->products->toArray(), $category->groupProducts->toArray());
+        usort($items, function ($it1, $it2){
+            return $it1['pivot']['order'] > $it2['pivot']['order'] ? 1 : -1;
+        });
+        
+        return view('admin.' . $this->slugRoutes . '.order', compact('category','items'));
+    }
+    public function orderStore($id, Request $request)
+    {
+        $category = Category::with('products', 'groupProducts')->find($id);
+        if(!$category) 
+            return abort(404, 'Category not found');
+
+        try {
+            $group = [];
+            $single = [];
+            foreach($request->items as $order => $data){
+                if($data[1] === 'group'){
+                    $group[$data[0]] = ['order' => $order+1];
+                }else{
+                    $single[$data[0]] = ['order' => $order+1];
+                }
+            }
+            $category->products()->sync($single);
+            $category->groupProducts()->sync($group);
+
+            return ['success'];
+        } catch (\Throwable $th) {
+            return abort(500, 'On error ocorred');
+        }
+        
+    }
 }

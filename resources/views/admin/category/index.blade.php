@@ -42,6 +42,9 @@
                                     <button class="btn badge badge-danger">
                                         <i class="fas fa-times"></i>
                                     </button>
+                                    <a href="{{ route('dashboard.category.order', $category->id) }}" class="btn badge badge-secondary">
+                                        <i class="fas fa-sort-amount-down"></i>
+                                    </a>
                                 </form>
                             </td>
                         </tr>
